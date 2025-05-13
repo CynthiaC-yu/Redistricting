@@ -1,0 +1,4 @@
+calculation/tl_2020_us_zcta520/*.shp filter=lfs diff=lfs merge=lfs -text
+calculation/tl_2020_us_zcta520/*.shx filter=lfs diff=lfs merge=lfs -text
+calculation/tl_2020_us_zcta520/*.dbf filter=lfs diff=lfs merge=lfs -text
+calculation/tl_2020_us_zcta520/*.prj filter=lfs diff=lfs merge=lfs -text
