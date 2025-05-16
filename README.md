@@ -51,3 +51,18 @@ This script allows the user to input a pair of latitude and longitude coordinate
 
 Input: floats in the terminal  
 Output: corresponding walk and bike scores shown in the terminal
+
+
+### allTransit_zip2score.py
+Source of Info: 
+- https://alltransit.cnt.org/metrics/
+
+This script allows the user to input a list of zip codes and recrieve the cooresponding AllTransit score.
+
+Input: a list of zip codes
+Output: a CSV file called **allTransit.csv**
+*I manually renamed the files and saved each for St. Louis City and St. Louis County.*  
+- For St. Louis City: **allTransit_city.csv**  
+- For St. Louis County: **allTransit_county.csv**
+
+  
