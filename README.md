@@ -3,6 +3,38 @@
 ## Data Collection
 I will briefly introduce the programs included in this folder.
 
+### ZCTAs
+A ZCTA (ZIP Code Tabulation Area) is the Census Bureau’s best‐fit area for a five-digit ZIP Code. You can think of it as a polygon drawn around the majority of addresses sharing the same ZIP. Unlike USPS ZIPs (which are routes, not areas), ZCTAs are static geographic units the Census uses to tabulate and publish population or demographic data at ZIP-like level.
+
+Since all ZCTAs are valid USPS ZIPs, and they are more standardized, we will use ZCTAs as units of the data we collect for this project.
+
+We fetched the St. Louis county and city's ZCTAs from Dexter — Data EXTractER. You may access the data with following link:
+
+- https://mcdc.missouri.edu/cgi-bin/broker?_PROGRAM=utils.uex2dex.sas&path=/pub/data/corrlst&dset=us_stzcta5_county
+
+
+### zip2census.py
+Source of Info:
+- https://data.census.gov/
+
+This script will convert a list of zip codes to the cooresponidng ethinicity and race information from census data. Following is the categories we include:
+
+- American Indian and Alaska Native
+- Asian
+- Black or African American
+- Hispanic or Latino
+- Native Hawaiian and Other Pacific Islander
+- Not Hispanic or Latino
+- Some Other Race
+- Two or More Races
+- White
+
+Input: a list of zip codes
+Output: a CSV file called **census_race_ethinicity.csv**
+*I manually renamed the files and saved each for St. Louis City and St. Louis County.*  
+- For St. Louis City: **census_race_ethinicity_city.csv**  
+- For St. Louis County: **census_race_ethinicity_county.csv**
+
 ### walk_score_zip_to_score.py
 Source of Info: 
 - https://www.walkscore.com/
@@ -65,4 +97,4 @@ Output: a CSV file called **allTransit.csv**
 - For St. Louis City: **allTransit_city.csv**  
 - For St. Louis County: **allTransit_county.csv**
 
-  
+
