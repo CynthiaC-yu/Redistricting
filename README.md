@@ -23,10 +23,10 @@ We fetched the St. Louis county and city's ZCTAs from Dexter — Data EXTractER.
   Mathematically, for each ZCTA and each group (e.g., White), we compute:
 
   $$
-  \mathrm{NormalizedValue}_{\mathrm{ZCTA},\,\mathrm{group}}
+  \text{NormalizedValue}_{\text{ZCTA},\,\text{group}}
   =
-  \frac{\mathrm{Count}_{\mathrm{ZCTA},\,\mathrm{group}}}
-       {\mathrm{Population}_{\mathrm{ZCTA}}}
+  \frac{\text{Count}_{\text{ZCTA},\,\text{group}}}
+       {\text{Population}_{\text{ZCTA}}}
   $$
 
 ### zip2census.py
