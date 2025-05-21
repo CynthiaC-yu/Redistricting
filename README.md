@@ -22,12 +22,12 @@ We fetched the St. Louis county and city's ZCTAs from Dexter — Data EXTractER.
   Ethnicity counts were normalized by ZCTA population.  
   Mathematically, for each ZCTA and each group (e.g., White), we compute:
 
-  $$
-  \text{NormalizedValue}_{\text{ZCTA},\,\text{group}}
+$$
+  NormalizedValue_{ZCTA,\,group}
   =
-  \frac{\text{Count}_{\text{ZCTA},\,\text{group}}}
-       {\text{Population}_{\text{ZCTA}}}
-  $$
+  \frac{Count_{ZCTA,\,group}}
+       {Population_{ZCTA}}
+$$
 
 ### zip2census.py
 Source of Info:
