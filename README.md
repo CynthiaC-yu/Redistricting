@@ -12,6 +12,21 @@ We fetched the St. Louis county and city's ZCTAs from Dexter — Data EXTractER.
 
 - https://mcdc.missouri.edu/cgi-bin/broker?_PROGRAM=utils.uex2dex.sas&path=/pub/data/corrlst&dset=us_stzcta5_county
 
+**Note:** Throughout this document, “ZIP code” and “ZCTA” are used interchangeably; however, all references should be understood as **ZCTAs**.
+
+### Data Processing Rules:
+- **Transit Scores**  
+  All transit-related metrics have been min–max rescaled to the \[0, 1\] interval.
+
+- **Census Data**  
+  Ethnicity counts were normalized by ZCTA population.  
+  Mathematically, for each ZCTA and each group (e.g. White), we compute:
+
+  \[
+    \text{NormalizedValue}_{\text{ZCTA},\,\text{group}}
+    = \frac{\text{Count}_{\text{ZCTA},\,\text{group}}}
+           {\text{Population}_{\text{ZCTA}}}
+  \]
 
 ### zip2census.py
 Source of Info:
