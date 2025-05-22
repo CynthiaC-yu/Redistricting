@@ -1,5 +1,5 @@
 import csv
-place = 'city'
+place = 'county'
 input_file  = f'census_normalized_{place}.csv'
 output_file = f'race_normalized_{place}.csv'
 
