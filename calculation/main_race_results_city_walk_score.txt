@@ -3,6 +3,9 @@ Conditional entropy of main-race partition X given transit score partition Y:
 Area of Interest: city
 Transit Score Criterion: walk_score
 Total population (proportion): 1.00
+Main-race Threshold: 0.8
+Good Transit-quality Threshold: 0.8
+Bad Transit-quality Threshold: 0.2
 
 Y = 'good':
 	population in Y: 0.15

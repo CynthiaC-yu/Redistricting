@@ -29,8 +29,8 @@ We compute the overall conditional entropy, which is calculating the sum while w
 import csv
 import math
 
-area = "county"
-transit_score = "walk_score"
+area = "city"
+transit_score = "all_transit"
 main_race_thresh = 0.8 
 good_thresh = 0.8
 bad_thresh = 0.2
@@ -146,7 +146,11 @@ with open(output_file, 'w') as out:
     out.write("Conditional entropy of main-race partition X given transit score partition Y:\n\n")
     out.write(f"Area of Interest: {area}\n")
     out.write(f"Transit Score Criterion: {transit_score}\n")
-    out.write(f"Total population (proportion): {total_pop:.2f}\n\n")
+    out.write(f"Total population (proportion): {total_pop:.2f}\n")
+    out.write(f"Main-race Threshold: {main_race_thresh}\n")
+    out.write(f"Good Transit-quality Threshold: {good_thresh}\n")
+    out.write(f"Bad Transit-quality Threshold: {bad_thresh}\n\n")
+
 
     for y in labels_Y:
         out.write(f"Y = {y!r}:\n")

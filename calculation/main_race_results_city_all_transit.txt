@@ -1,15 +1,15 @@
 Conditional entropy of main-race partition X given transit score partition Y:
 
-Area of Interest: county
-Transit Score Criterion: walk_score
+Area of Interest: city
+Transit Score Criterion: all_transit
 Total population (proportion): 1.00
 Main-race Threshold: 0.8
 Good Transit-quality Threshold: 0.8
 Bad Transit-quality Threshold: 0.2
 
 Y = 'good':
-	population in Y: 0.01
-	Ent(X|Y=good): 0.0613 bits
+	population in Y: 0.24
+	Ent(X|Y=good): 0.4935 bits
 	** Breakdown by main-race partition X **
 	American Indian and Alaska Native             p_ij=0.0000	contribution=0.0000
 	Asian                                         p_ij=0.0000	contribution=0.0000
@@ -18,47 +18,47 @@ Y = 'good':
 	Native Hawaiian and Other Pacific Islander    p_ij=0.0000	contribution=0.0000
 	Some Other Race                               p_ij=0.0000	contribution=0.0000
 	White                                         p_ij=0.0000	contribution=0.0000
-	mixed                                         p_ij=0.0090	contribution=0.0613
+	mixed                                         p_ij=0.2390	contribution=0.4935
 
 Y = 'average':
-	population in Y: 0.70
-	Ent(X|Y=average): 1.3432 bits
+	population in Y: 0.76
+	Ent(X|Y=average): 1.4938 bits
 	** Breakdown by main-race partition X **
 	American Indian and Alaska Native             p_ij=0.0000	contribution=0.0000
 	Asian                                         p_ij=0.0000	contribution=0.0000
-	Black or African American                     p_ij=0.0837	contribution=0.2995
+	Black or African American                     p_ij=0.2595	contribution=0.5050
 	Hispanic or Latino                            p_ij=0.0000	contribution=0.0000
 	Native Hawaiian and Other Pacific Islander    p_ij=0.0000	contribution=0.0000
 	Some Other Race                               p_ij=0.0000	contribution=0.0000
-	White                                         p_ij=0.3269	contribution=0.5273
-	mixed                                         p_ij=0.2857	contribution=0.5164
+	White                                         p_ij=0.2966	contribution=0.5201
+	mixed                                         p_ij=0.2050	contribution=0.4687
 
 Y = 'bad':
-	population in Y: 0.29
-	Ent(X|Y=bad): 0.9074 bits
+	population in Y: 0.00
+	Ent(X|Y=bad): 0.0000 bits
 	** Breakdown by main-race partition X **
 	American Indian and Alaska Native             p_ij=0.0000	contribution=0.0000
 	Asian                                         p_ij=0.0000	contribution=0.0000
-	Black or African American                     p_ij=0.0243	contribution=0.1302
+	Black or African American                     p_ij=0.0000	contribution=0.0000
 	Hispanic or Latino                            p_ij=0.0000	contribution=0.0000
 	Native Hawaiian and Other Pacific Islander    p_ij=0.0000	contribution=0.0000
 	Some Other Race                               p_ij=0.0000	contribution=0.0000
-	White                                         p_ij=0.1531	contribution=0.4146
-	mixed                                         p_ij=0.1173	contribution=0.3627
+	White                                         p_ij=0.0000	contribution=0.0000
+	mixed                                         p_ij=0.0000	contribution=0.0000
 
-Overall Ent(X|Y): 1.2032 bits
+Overall Ent(X|Y): 1.2547 bits
 
 ZIP codes by walk-score partition (Y):
-	good: 63143
-	average: 63011, 63021, 63025, 63031, 63033, 63042, 63043, 63049, 63074, 63088, 63105, 63114, 63117, 63119, 63121, 63122, 63123, 63125, 63126, 63128, 63130, 63132, 63133, 63135, 63136, 63137, 63144, 63146
-	bad: 63005, 63017, 63026, 63034, 63038, 63040, 63044, 63069, 63120, 63124, 63127, 63129, 63131, 63134, 63138, 63140, 63141
+	good: 63101, 63102, 63103, 63105, 63108, 63110, 63112, 63130, 63143
+	average: 63104, 63106, 63107, 63109, 63111, 63113, 63115, 63116, 63117, 63118, 63119, 63120, 63123, 63125, 63133, 63136, 63137, 63138, 63139, 63147
+	bad: 
 
 ZIP codes by main-race partition (X):
 	American Indian and Alaska Native: 
 	Asian: 
-	Black or African American: 63120, 63121, 63133, 63136, 63137, 63138
+	Black or African American: 63106, 63107, 63113, 63115, 63120, 63133, 63136, 63137, 63138, 63147
 	Hispanic or Latino: 
 	Native Hawaiian and Other Pacific Islander: 
 	Some Other Race: 
-	White: 63011, 63021, 63025, 63026, 63038, 63040, 63049, 63069, 63088, 63119, 63122, 63123, 63124, 63125, 63126, 63127, 63128, 63129, 63131, 63144
-	mixed: 63005, 63017, 63031, 63033, 63034, 63042, 63043, 63044, 63074, 63105, 63114, 63117, 63130, 63132, 63134, 63135, 63140, 63141, 63143, 63146
+	White: 63109, 63119, 63123, 63125, 63139
+	mixed: 63101, 63102, 63103, 63104, 63105, 63108, 63110, 63111, 63112, 63116, 63117, 63118, 63130, 63143
