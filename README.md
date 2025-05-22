@@ -24,7 +24,8 @@ This script computes the conditional entropy of the main-race partition (X) give
    - For each Y = y:
       - Ent(X|Y=y) = sum over x of (pop_XY[y][x] / pop_Y[y]) * log2(pop_Y[y] / pop_XY[y][x])
    - Overall:
-      - Ent(X|Y) = sum over y of (pop_Y[y] / total_pop) * Ent(X|Y=y)
+      - Ent(X|Y) = sum over y of pop_Y[y] * Ent(X|Y=y)
+      - We can safely do this because all data is normalized to its ZIP code.
 
 - *Output*:
    - **output will be write into** (`main_race_results_<area>_<transit_score>.txt`)
