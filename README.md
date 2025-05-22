@@ -1,5 +1,43 @@
 # Redistricting
 
+## Calculation
+
+### main_race.py
+This script computes the conditional entropy of the main-race partition (X) given transit‐quality bins (Y) for the specified area.
+
+- *Inputs*: 
+   - **Census file** (`race_normalized_<area>.csv`):  
+     Columns: `zip_code`, `population`, and one column per race proportion.  
+   - **Transit scores file** (`transit_scores_<area>.csv`):  
+     Columns: `zip_code` and the chosen transit metric (e.g. `walk_score`).
+   - **main_race_thresh**: a float in interval of \[0, 1\]. Zip code block has a race's population proportion greater or equal to the threshold will use this race as its main-race label.
+   - **good_thresh**: a float in interval of \[0, 1\]. Greater or equal to this threshold will be marked as good for transit quality.
+   - **bad_thresh**: a float in interval of \[0, 1\]. Lower than this threshold will be marked as bad for transit quality. 
+
+- *Entropy calculation*: 
+   - **Race partition (X)**:  
+      - Assign each ZIP to its *main race* if that race’s proportion ≥ `main_race_thresh`; otherwise label it `mixed`.  
+   - **Transit partition (Y)**:  
+      - Bin each ZIP’s score into `good` (≥ `good_thresh`), `average` (≥ `bad_thresh`), or `bad` (< `bad_thresh`).
+   - `pop_XY[y][x]` = total population in ZIPs where X = x *and* Y = y.  
+   - `pop_Y[y]`    = total population in ZIPs where Y = y.
+   - For each Y = y:
+     \[
+       \mathrm{Ent}(X|Y=y)
+       = \sum_{x} \frac{\text{pop\_XY}[y][x]}{\text{pop\_Y}[y]}
+         \log_2\!\Bigl(\frac{\text{pop\_Y}[y]}{\text{pop\_XY}[y][x]}\Bigr).
+     \]
+   - Overall:
+     \[
+       \mathrm{Ent}(X|Y) = \sum_{y}
+         \frac{\text{pop\_Y}[y]}{\sum_y \text{pop\_Y}[y]}\,\mathrm{Ent}(X|Y=y).
+     \]
+
+- *Output*:
+   - **output will be write into** (`main_race_results_<area>_<transit_score>.txt`)
+   - Prints total population, Ent(X|Y=y) for each bin, full breakdown of contributions,
+   - Lists ZIP codes in each X and Y partition for debugging.
+
 ## Data Collection
 I will briefly introduce the programs included in this folder.
 

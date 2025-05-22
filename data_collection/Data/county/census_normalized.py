@@ -8,7 +8,11 @@ For each zip code, we did following calculation for its data:
 race and ethinitity column (e.g. white) / total population of the zip code
 '''
 
-place = 'city'
+place = 'county'
+if place == 'city':
+    TOTAL_POP = 564266 # CITY
+elif place == 'county':
+    TOTAL_POP = 1074242 # COUNTY
 census_file     = f'census_race_ethnicity_{place}.csv'
 population_file = f'zip_population_{place}.csv'
 output_file     = f'census_normalized_{place}.csv'
@@ -49,7 +53,7 @@ with open(census_file, newline='') as cen_f, \
 
         out_row = {
             'zip_code': zipc,
-            'population': pop
+            'population': pop / TOTAL_POP
         }
 
         if pop > 0:

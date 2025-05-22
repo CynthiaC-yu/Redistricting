@@ -1,0 +1,61 @@
+Conditional entropy of main-race partition X given transit score partition Y:
+
+Area of Interest: city
+Transit Score Criterion: walk_score
+Total population (proportion): 1.00
+
+Y = 'good':
+	population in Y: 0.15
+	Ent(X|Y=good): 0.5436 bits
+	** Breakdown by main-race partition X **
+	American Indian and Alaska Native             p_ij=0.0000	contribution=0.0000
+	Asian                                         p_ij=0.0000	contribution=0.0000
+	Black or African American                     p_ij=0.0000	contribution=0.0000
+	Hispanic or Latino                            p_ij=0.0000	contribution=0.0000
+	Native Hawaiian and Other Pacific Islander    p_ij=0.0000	contribution=0.0000
+	Some Other Race                               p_ij=0.0000	contribution=0.0000
+	White                                         p_ij=0.0475	contribution=0.2087
+	mixed                                         p_ij=0.1015	contribution=0.3349
+
+Y = 'average':
+	population in Y: 0.80
+	Ent(X|Y=average): 1.5044 bits
+	** Breakdown by main-race partition X **
+	American Indian and Alaska Native             p_ij=0.0000	contribution=0.0000
+	Asian                                         p_ij=0.0000	contribution=0.0000
+	Black or African American                     p_ij=0.2133	contribution=0.4755
+	Hispanic or Latino                            p_ij=0.0000	contribution=0.0000
+	Native Hawaiian and Other Pacific Islander    p_ij=0.0000	contribution=0.0000
+	Some Other Race                               p_ij=0.0000	contribution=0.0000
+	White                                         p_ij=0.2491	contribution=0.4995
+	mixed                                         p_ij=0.3425	contribution=0.5294
+
+Y = 'bad':
+	population in Y: 0.05
+	Ent(X|Y=bad): 0.2049 bits
+	** Breakdown by main-race partition X **
+	American Indian and Alaska Native             p_ij=0.0000	contribution=0.0000
+	Asian                                         p_ij=0.0000	contribution=0.0000
+	Black or African American                     p_ij=0.0462	contribution=0.2049
+	Hispanic or Latino                            p_ij=0.0000	contribution=0.0000
+	Native Hawaiian and Other Pacific Islander    p_ij=0.0000	contribution=0.0000
+	Some Other Race                               p_ij=0.0000	contribution=0.0000
+	White                                         p_ij=0.0000	contribution=0.0000
+	mixed                                         p_ij=0.0000	contribution=0.0000
+
+Overall Ent(X|Y): 1.3013 bits
+
+ZIP codes by walk-score partition (Y):
+	good: 63101, 63109, 63110, 63118, 63143
+	average: 63102, 63103, 63104, 63105, 63106, 63107, 63108, 63111, 63112, 63113, 63115, 63116, 63117, 63119, 63123, 63125, 63130, 63133, 63136, 63137, 63139, 63147
+	bad: 63120, 63138
+
+ZIP codes by main-race partition (X):
+	American Indian and Alaska Native: 
+	Asian: 
+	Black or African American: 63106, 63107, 63113, 63115, 63120, 63133, 63136, 63137, 63138, 63147
+	Hispanic or Latino: 
+	Native Hawaiian and Other Pacific Islander: 
+	Some Other Race: 
+	White: 63109, 63119, 63123, 63125, 63139
+	mixed: 63101, 63102, 63103, 63104, 63105, 63108, 63110, 63111, 63112, 63116, 63117, 63118, 63130, 63143
