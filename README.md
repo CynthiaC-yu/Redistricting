@@ -22,16 +22,9 @@ This script computes the conditional entropy of the main-race partition (X) give
    - `pop_XY[y][x]` = total population in ZIPs where X = x *and* Y = y.  
    - `pop_Y[y]`    = total population in ZIPs where Y = y.
    - For each Y = y:
-     \[
-       \mathrm{Ent}(X|Y=y)
-       = \sum_{x} \frac{\text{pop\_XY}[y][x]}{\text{pop\_Y}[y]}
-         \log_2\!\Bigl(\frac{\text{pop\_Y}[y]}{\text{pop\_XY}[y][x]}\Bigr).
-     \]
+      - Ent(X|Y=y) = sum over x of (pop_XY[y][x] / pop_Y[y]) * log2(pop_Y[y] / pop_XY[y][x])
    - Overall:
-     \[
-       \mathrm{Ent}(X|Y) = \sum_{y}
-         \frac{\text{pop\_Y}[y]}{\sum_y \text{pop\_Y}[y]}\,\mathrm{Ent}(X|Y=y).
-     \]
+      - Ent(X|Y) = sum over y of (pop_Y[y] / total_pop) * Ent(X|Y=y)
 
 - *Output*:
    - **output will be write into** (`main_race_results_<area>_<transit_score>.txt`)
