@@ -24,14 +24,23 @@ We will also allow user to choose the criterion of transit score.
 
 We compute the overall conditional entropy, which is calculating the sum while weighted each Y_j:
    Ent(X | Y) = Σ_j P(Y = j) · Ent(X | Y = j)
+
+"""
+
+
+"""
+Normalize 
+Calculate Ent(X)
+Divide the conditonal entropy to Ent(X)
+
 """
 
 import csv
 import math
 
-area = "city"
-transit_score = "all_transit"
-main_race_thresh = 0.8 
+area = "county"
+transit_score = "walk_score"
+main_race_thresh = 0.75 
 good_thresh = 0.8
 bad_thresh = 0.2
 
@@ -43,7 +52,7 @@ Load transit score and assign Y_label (Evaluating the Quality of Transit).
 '''
 race_file    = f'race_normalized_{area}.csv' # zip_code, population, race proportions
 transit_file = f'transit_scores_{area}.csv' # zip_code, walk_score
-output_file  = f'main_race_results_{area}_{transit_score}.txt'
+output_file  = f'main_race_results_{area}_{transit_score}_{main_race_thresh}.txt'
 
 race_cols = [
     'American Indian and Alaska Native',
@@ -118,7 +127,7 @@ for zipc, info in race_data.items():
 '''
 Compute conditional entropy Ent(X|Y)
 '''
-total_pop = sum(pop_Y.values())
+total_pop = sum(pop_Y.values()) # Checking if normalized properly
 ent_Y = {}
 detailed = {}
 for y in labels_Y:
@@ -139,6 +148,19 @@ for y in labels_Y:
 # all data to the Zip code
 ent_X_given_Y = sum(pop_Y[y] * ent_Y[y] for y in labels_Y)
 
+pop_X_total = {x: 0.0 for x in labels_X}
+for y in labels_Y:
+    for x in labels_X:
+        pop_X_total[x] += pop_XY[y][x]
+
+ent_X = 0.0
+for x in labels_X:
+    p_x = pop_X_total[x] 
+    if p_x > 0:
+        ent_X += p_x * math.log2(1.0 / p_x)
+
+seg_score = ent_X_given_Y / ent_X if ent_X > 0 else float('nan')
+
 '''
 Output result into txt file
 '''
@@ -156,12 +178,14 @@ with open(output_file, 'w') as out:
         out.write(f"Y = {y!r}:\n")
         out.write(f"\tpopulation in Y: {pop_Y[y]:.2f}\n")
         out.write(f"\tEnt(X|Y={y}): {ent_Y[y]:.4f} bits\n")
+        out.write(f"\tSeg(X|Y={y}): {pop_Y[y] * ent_Y[y] / ent_X:.4f} bits\n")
         out.write("\t** Breakdown by main-race partition X **\n")
         for x, p_xy, term in detailed[y]:
             out.write(f"\t{x:45s} p_ij={p_xy:.4f}\tcontribution={term:.4f}\n")
         out.write("\n")
-
-    out.write(f"Overall Ent(X|Y): {ent_X_given_Y:.4f} bits\n\n")
+    out.write(f"Overall Ent(X): {ent_X:.4f} bits\n")
+    out.write(f"Overall Ent(X|Y): {ent_X_given_Y:.4f} bits\n")
+    out.write(f"Overall Seg(X|Y): {seg_score:.4f}\n\n")
 
     # ZIP codes in each Y partition
     out.write("ZIP codes by walk-score partition (Y):\n")
@@ -175,3 +199,27 @@ with open(output_file, 'w') as out:
         out.write(f"\t{x}: {', '.join(sorted(zips_by_X[x]))}\n")
 
 print(f"Results (including full entropy breakdown) written to {output_file}")
+
+
+
+zip_output_file = f'zip_results_{area}_{transit_score}.txt'
+
+labels = labels_Y  # ['good','average','bad']
+
+zips_lists = {y: sorted(zips_by_Y[y]) for y in labels}
+
+max_len = max(len(v) for v in zips_lists.values())
+
+with open(zip_output_file, 'w') as out:
+
+    out.write('\t'.join(labels) + '\n')
+    for i in range(max_len):
+        row = []
+        for y in labels:
+            if i < len(zips_lists[y]):
+                row.append(zips_lists[y][i])
+            else:
+                row.append('00000')  
+        out.write('\t'.join(row) + '\n')
+
+print(f"Vertical ZIP list for Y written to {zip_output_file}")
