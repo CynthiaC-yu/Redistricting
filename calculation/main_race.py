@@ -202,7 +202,7 @@ print(f"Results (including full entropy breakdown) written to {output_file}")
 
 
 
-zip_output_file = f'zip_results_{area}_{transit_score}.txt'
+zip_output_file = f'zip_results_{area}_{transit_score}_{main_race_thresh}.txt'
 
 labels = labels_Y  # ['good','average','bad']
 

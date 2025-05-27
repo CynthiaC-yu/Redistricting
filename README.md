@@ -31,6 +31,16 @@ This script computes the conditional entropy of the main-race partition (X) give
    - **output will be write into** (`main_race_results_<area>_<transit_score>.txt`)
    - Prints total population, Ent(X|Y=y) for each bin, full breakdown of contributions,
    - Lists ZIP codes in each X and Y partition for debugging.
+### Visualizer
+This script will visualize parititions of transit quality.
+- *Input*:
+   -  `'zip_results_{area}_{transit_score}_{main_race_thresh}.txt'` this file will be generated in `main_race.py`.
+   - *area*: String "city" or "county"
+   - *transit_score*: String such as "walk_score" or "all_transit"
+   - *transit_score*: float between 0 to 1.
+- *Output*:
+   - It will generate a matplotlib interative graph.
+   - It will also generate an html file in format of `stl_{area}_{transit_score}_map_{main_race_thresh}.html`.
 
 ## Data Collection
 I will briefly introduce the programs included in this folder.
