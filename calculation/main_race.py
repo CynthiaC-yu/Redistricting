@@ -136,7 +136,7 @@ for y in labels_Y:
     for x in labels_X:
         p_xy = pop_XY[y][x]
         if p_xy > 0:
-            term = p_xy * math.log2(1.0 / p_xy)
+            term = - p_xy * math.log2(p_xy)
             ent += term
             
         else:
@@ -155,9 +155,10 @@ for y in labels_Y:
 
 ent_X = 0.0
 for x in labels_X:
-    p_x = pop_X_total[x] 
+    # P(X=x)
+    p_x = sum(pop_XY[y][x] for y in labels_Y) 
     if p_x > 0:
-        ent_X += p_x * math.log2(1.0 / p_x)
+        ent_X += - p_x * math.log2(p_x) #!!!
 
 seg_score = ent_X_given_Y / ent_X if ent_X > 0 else float('nan')
 
@@ -202,7 +203,9 @@ print(f"Results (including full entropy breakdown) written to {output_file}")
 
 
 
-zip_output_file = f'zip_results_{area}_{transit_score}_{main_race_thresh}.txt'
+table_Y = "transit_quality"
+
+zip_output_file_Y = f'{table_Y}_zip_results_{area}_{transit_score}_{main_race_thresh}.txt'
 
 labels = labels_Y  # ['good','average','bad']
 
@@ -210,7 +213,7 @@ zips_lists = {y: sorted(zips_by_Y[y]) for y in labels}
 
 max_len = max(len(v) for v in zips_lists.values())
 
-with open(zip_output_file, 'w') as out:
+with open(zip_output_file_Y, 'w') as out:
 
     out.write('\t'.join(labels) + '\n')
     for i in range(max_len):
@@ -222,4 +225,32 @@ with open(zip_output_file, 'w') as out:
                 row.append('00000')  
         out.write('\t'.join(row) + '\n')
 
-print(f"Vertical ZIP list for Y written to {zip_output_file}")
+print(f"Vertical ZIP list for {table_Y} written to {zip_output_file_Y}")
+
+
+
+table_X = "race"
+
+zip_output_file_X = f'{table_X}_zip_results_{area}_{transit_score}_{main_race_thresh}.txt'
+
+labels = labels_X  # ['good','average','bad']
+
+zips_lists = {x: sorted(zips_by_X[x]) for x in labels}
+
+max_len = max(len(v) for v in zips_lists.values())
+
+with open(zip_output_file_X, 'w') as out:
+
+    out.write('\t'.join(labels) + '\n')
+    for i in range(max_len):
+        row = []
+        for x in labels:
+            if i < len(zips_lists[x]):
+                row.append(zips_lists[x][i])
+            else:
+                row.append('00000')  
+        out.write('\t'.join(row) + '\n')
+
+print(f"Vertical ZIP list for {table_X} written to {zip_output_file_X}")
+
+

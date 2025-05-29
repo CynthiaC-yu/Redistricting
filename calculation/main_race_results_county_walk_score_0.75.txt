@@ -51,7 +51,6 @@ Y = 'bad':
 
 Overall Ent(X): 1.3526 bits
 Overall Ent(X|Y): 1.1836 bits
-
 Overall Seg(X|Y): 0.8751
 
 ZIP codes by walk-score partition (Y):

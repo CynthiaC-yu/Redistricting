@@ -12,10 +12,11 @@ zip_results_file is generated in main_race.py
 Output file will follow the format: stl_{area}_{transit_score}_map_{main_race_thresh}.html
 """
 
-area = "city"
+area = "county"
+table = "transit_quality"
 transit_score = "walk_score"
-main_race_thresh = 0.7
-zip_results_file = f'zip_results_{area}_{transit_score}_{main_race_thresh}.txt'
+main_race_thresh = 0.75
+zip_results_file = f'{table}_zip_results_{area}_{transit_score}_{main_race_thresh}.txt'
 zips_by_label = defaultdict(list)
 
 with open(zip_results_file, newline='') as f:
@@ -47,7 +48,7 @@ county_gdf["category_num"] = county_gdf["category"].map(category_numeric)
 
 # remember to make sure each label has a cooresponidng color
 color_map = {
-    **{lab: col for lab, col in zip(headers, ["green","orange","red","purple","blue"][:len(headers)])},
+    **{lab: col for lab, col in zip(headers, ["green","orange","red","purple","blue", "pink", "yellow", "cyan"][:len(headers)])},
     "unknown": "lightgrey"
 }
 
@@ -77,7 +78,7 @@ for idx, row in county_gdf.iterrows():
         bbox=dict(facecolor='none', edgecolor='none', alpha=0.5, boxstyle='round,pad=0.2')
     )
 
-ax.set_title(f"St. Louis {area} ZCTAs by {transit_score} Category")
+ax.set_title(f"{table}: St. Louis {area} ZCTAs by {transit_score} Category with main-race thresh {main_race_thresh}")
 ax.set_axis_off()
 plt.tight_layout()
 plt.show()
@@ -94,11 +95,11 @@ def style_function(feature):
 m = folium.Map(location=[38.63, -90.42], zoom_start=10, tiles="cartodbpositron")
 folium.GeoJson(
     county_gdf.__geo_interface__,
-    name="Transit Category",
+    name=f"{table} Category",
     style_function=style_function,
     tooltip=folium.GeoJsonTooltip(fields=[ZIP_FIELD, "category"])
 ).add_to(m)
 folium.LayerControl().add_to(m)
-html_output_file = f"stl_{area}_{transit_score}_map_{main_race_thresh}.html"
-m.save()
+html_output_file = f"stl_{table}_{area}_{transit_score}_map_{main_race_thresh}.html"
+m.save(html_output_file)
 print(f"Interactive map saved to {html_output_file}")
