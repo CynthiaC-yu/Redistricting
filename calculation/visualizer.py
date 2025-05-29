@@ -48,7 +48,7 @@ county_gdf["category_num"] = county_gdf["category"].map(category_numeric)
 
 # remember to make sure each label has a cooresponidng color
 color_map = {
-    **{lab: col for lab, col in zip(headers, ["green","orange","red","purple","blue", "pink", "yellow", "cyan"][:len(headers)])},
+    **{lab: col for lab, col in zip(headers, ["green", "blue", "yellow", "orange", "red","purple", "pink", "cyan"][:len(headers)])},
     "unknown": "lightgrey"
 }
 

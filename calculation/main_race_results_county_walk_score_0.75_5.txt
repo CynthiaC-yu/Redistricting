@@ -4,13 +4,13 @@ Area of Interest: county
 Transit Score Criterion: walk_score
 Total population (proportion): 1.00
 Main-race Threshold: 0.75
-Good Transit-quality Threshold: 0.8
-Bad Transit-quality Threshold: 0.2
+Good Transit-quality Threshold: 0.6
+Bad Transit-quality Threshold: 0.4
 
-Y = 'good':
+Y = 'very_good':
 	population in Y: 0.01
-	Ent(X|Y=good): 0.0613 bits
-	Seg(X|Y=good): 0.0004 bits
+	Ent(X|Y=very_good): 0.0613 bits
+	Seg(X|Y=very_good): 0.0004 bits
 	** Breakdown by main-race partition X **
 	American Indian and Alaska Native             p_ij=0.0000	contribution=0.0000
 	Asian                                         p_ij=0.0000	contribution=0.0000
@@ -21,24 +21,52 @@ Y = 'good':
 	White                                         p_ij=0.0000	contribution=0.0000
 	mixed                                         p_ij=0.0090	contribution=0.0613
 
-Y = 'average':
-	population in Y: 0.70
-	Ent(X|Y=average): 1.3410 bits
-	Seg(X|Y=average): 0.6903 bits
+Y = 'good':
+	population in Y: 0.10
+	Ent(X|Y=good): 0.4243 bits
+	Seg(X|Y=good): 0.0305 bits
 	** Breakdown by main-race partition X **
 	American Indian and Alaska Native             p_ij=0.0000	contribution=0.0000
 	Asian                                         p_ij=0.0000	contribution=0.0000
-	Black or African American                     p_ij=0.0837	contribution=0.2995
+	Black or African American                     p_ij=0.0000	contribution=0.0000
 	Hispanic or Latino                            p_ij=0.0000	contribution=0.0000
 	Native Hawaiian and Other Pacific Islander    p_ij=0.0000	contribution=0.0000
 	Some Other Race                               p_ij=0.0000	contribution=0.0000
-	White                                         p_ij=0.3359	contribution=0.5287
-	mixed                                         p_ij=0.2767	contribution=0.5129
+	White                                         p_ij=0.0503	contribution=0.2170
+	mixed                                         p_ij=0.0470	contribution=0.2073
+
+Y = 'average':
+	population in Y: 0.22
+	Ent(X|Y=average): 0.8005 bits
+	Seg(X|Y=average): 0.1280 bits
+	** Breakdown by main-race partition X **
+	American Indian and Alaska Native             p_ij=0.0000	contribution=0.0000
+	Asian                                         p_ij=0.0000	contribution=0.0000
+	Black or African American                     p_ij=0.0389	contribution=0.1821
+	Hispanic or Latino                            p_ij=0.0000	contribution=0.0000
+	Native Hawaiian and Other Pacific Islander    p_ij=0.0000	contribution=0.0000
+	Some Other Race                               p_ij=0.0000	contribution=0.0000
+	White                                         p_ij=0.0780	contribution=0.2871
+	mixed                                         p_ij=0.0995	contribution=0.3312
 
 Y = 'bad':
+	population in Y: 0.38
+	Ent(X|Y=bad): 1.0545 bits
+	Seg(X|Y=bad): 0.2983 bits
+	** Breakdown by main-race partition X **
+	American Indian and Alaska Native             p_ij=0.0000	contribution=0.0000
+	Asian                                         p_ij=0.0000	contribution=0.0000
+	Black or African American                     p_ij=0.0448	contribution=0.2007
+	Hispanic or Latino                            p_ij=0.0000	contribution=0.0000
+	Native Hawaiian and Other Pacific Islander    p_ij=0.0000	contribution=0.0000
+	Some Other Race                               p_ij=0.0000	contribution=0.0000
+	White                                         p_ij=0.2076	contribution=0.4708
+	mixed                                         p_ij=0.1303	contribution=0.3830
+
+Y = 'very_bad':
 	population in Y: 0.29
-	Ent(X|Y=bad): 0.8461 bits
-	Seg(X|Y=bad): 0.1844 bits
+	Ent(X|Y=very_bad): 0.8461 bits
+	Seg(X|Y=very_bad): 0.1844 bits
 	** Breakdown by main-race partition X **
 	American Indian and Alaska Native             p_ij=0.0000	contribution=0.0000
 	Asian                                         p_ij=0.0000	contribution=0.0000
@@ -50,13 +78,15 @@ Y = 'bad':
 	mixed                                         p_ij=0.0596	contribution=0.2424
 
 Overall Ent(X): 1.3526 bits
-Overall Ent(X|Y): 1.1836 bits
-Overall Seg(X|Y): 0.8751
+Overall Ent(X|Y): 0.8679 bits
+Overall Seg(X|Y): 0.6416
 
 ZIP codes by walk-score partition (Y):
-	good: 63143
-	average: 63011, 63021, 63025, 63031, 63033, 63042, 63043, 63049, 63074, 63088, 63105, 63114, 63117, 63119, 63121, 63122, 63123, 63125, 63126, 63128, 63130, 63132, 63133, 63135, 63136, 63137, 63144, 63146
-	bad: 63005, 63017, 63026, 63034, 63038, 63040, 63044, 63069, 63120, 63124, 63127, 63129, 63131, 63134, 63138, 63140, 63141
+	very_good: 63143
+	good: 63074, 63114, 63117, 63119, 63144
+	average: 63033, 63123, 63125, 63130, 63132, 63135, 63136
+	bad: 63011, 63021, 63025, 63031, 63042, 63043, 63049, 63088, 63105, 63121, 63122, 63126, 63128, 63133, 63137, 63146
+	very_bad: 63005, 63017, 63026, 63034, 63038, 63040, 63044, 63069, 63120, 63124, 63127, 63129, 63131, 63134, 63138, 63140, 63141
 
 ZIP codes by main-race partition (X):
 	American Indian and Alaska Native: 

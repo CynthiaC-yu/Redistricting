@@ -40,9 +40,23 @@ import math
 
 area = "county"
 transit_score = "walk_score"
-main_race_thresh = 0.75 
-good_thresh = 0.8
-bad_thresh = 0.2
+main_race_thresh = 0.75
+'''
+3
+'''
+# good_thresh = 0.8
+# bad_thresh = 0.2
+
+
+'''
+5
+'''
+very_good_thresh = 0.8
+good_thresh = 0.6
+bad_thresh = 0.4
+very_bad_thresh = 0.2
+
+
 
 '''
 Input files.
@@ -79,16 +93,35 @@ with open(transit_file, newline='') as tf:
     for row in reader:
         zipc = row['zip_code']
         score = float(row[transit_score])
-        if score >= good_thresh:
+        '''
+        3
+        '''
+        # if score >= good_thresh:
+        #     y_label = 'good'
+        # elif score >= bad_thresh:
+        #     y_label = 'average'
+        # else: 
+        #     y_label = 'bad'
+
+        '''
+        5
+        '''
+        if score >= very_good_thresh:
+            y_label = 'very_good'
+        elif score >= good_thresh:
             y_label = 'good'
         elif score >= bad_thresh:
             y_label = 'average'
-        else:
+        elif score >= very_bad_thresh:
             y_label = 'bad'
+        else:
+            y_label = 'very_bad'
+
+
         transit_data[zipc] = y_label
 
 labels_X = race_cols + ['mixed']
-labels_Y = ['good', 'average', 'bad']
+labels_Y = ['very_good', 'good', 'average', 'bad', 'very_bad']
 
 # Prepare containers for zip lists - for later ouput/debug purpose
 zips_by_X = {x: [] for x in labels_X}
@@ -146,14 +179,12 @@ for y in labels_Y:
 
 # using linear combination to calculate Ent(X|Y). We can safely do this as we already normalized 
 # all data to the Zip code
+
+# since total = 1, we reduced it in code, but the original formula should be: sum(pop_Y[y] * ent_Y[y] / total for y in labels_Y)
 ent_X_given_Y = sum(pop_Y[y] * ent_Y[y] for y in labels_Y)
 
-pop_X_total = {x: 0.0 for x in labels_X}
-for y in labels_Y:
-    for x in labels_X:
-        pop_X_total[x] += pop_XY[y][x]
-
 ent_X = 0.0
+
 for x in labels_X:
     # P(X=x)
     p_x = sum(pop_XY[y][x] for y in labels_Y) 
@@ -225,7 +256,7 @@ with open(zip_output_file_Y, 'w') as out:
                 row.append('00000')  
         out.write('\t'.join(row) + '\n')
 
-print(f"Vertical ZIP list for {table_Y} written to {zip_output_file_Y}")
+print(f"ZIP list for {table_Y} written to {zip_output_file_Y}")
 
 
 
@@ -251,6 +282,6 @@ with open(zip_output_file_X, 'w') as out:
                 row.append('00000')  
         out.write('\t'.join(row) + '\n')
 
-print(f"Vertical ZIP list for {table_X} written to {zip_output_file_X}")
+print(f"ZIP list for {table_X} written to {zip_output_file_X}")
 
 

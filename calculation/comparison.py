@@ -5,8 +5,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
+'''
+3 or 5: edit the parameters
+'''
 def load_data(area, transit_score, main_race_thresh,
-              good_thresh=0.8, bad_thresh=0.2):
+              very_good_thresh = 0.8, good_thresh=0.6, bad_thresh=0.4, very_bad_thresh=0.2):
     race_cols = [
         'American Indian and Alaska Native',
         'Asian',
@@ -17,7 +20,8 @@ def load_data(area, transit_score, main_race_thresh,
         'White'
     ]
     labels_X = race_cols + ['mixed']
-    labels_Y = ['good', 'average', 'bad']
+    labels_Y = ['very_good', 'good', 'average', 'bad', 'very_bad']
+
 
     # read race
     race_data = {}
@@ -35,14 +39,33 @@ def load_data(area, transit_score, main_race_thresh,
         reader = csv.DictReader(tf)
         for r in reader:
             z = r['zip_code']
-            s = float(r[transit_score])
-            if s >= good_thresh:    
-                transit[z] = 'good'
-            elif s >= bad_thresh:     
-                transit[z] = 'average'
-            else:                     
-                transit[z] = 'bad'
+            score = float(r[transit_score])
+            '''
+            3
+            '''
+            if score >= good_thresh:
+                y_label = 'good'
+            elif score >= bad_thresh:
+                y_label = 'average'
+            else: 
+                y_label = 'bad'
 
+            '''
+            5
+            '''
+            # if score >= very_good_thresh:
+            #     y_label = 'very_good'
+            # elif score >= good_thresh:
+            #     y_label = 'good'
+            # elif score >= bad_thresh:
+            #     y_label = 'average'
+            # elif score >= very_bad_thresh:
+            #     y_label = 'bad'
+            # else:
+            #     y_label = 'very_bad'
+
+
+            transit[z] = y_label
     # cumulate pop_XY, pop_Y
     pop_XY = {y:{x:0.0 for x in labels_X} for y in labels_Y}
     pop_Y  = {y:0.0 for y in labels_Y}
@@ -56,42 +79,6 @@ def load_data(area, transit_score, main_race_thresh,
         pop_Y[y_lab] += pop
 
     return labels_X, labels_Y, pop_XY, pop_Y
-
-
-# def compute_ent(labels_X, labels_Y, pop_XY, pop_Y):
-#     """
-#     Return Seg_entropy = H(X|Y)/H(X), guaranteed in [0,1].
-#     pop_XY[y][x] 和 pop_Y[y] 都是“人数”。
-#     """
-#     total = sum(pop_Y.values())
-
-#     # 1) H(X|Y)
-#     #    H(X|Y=j) = - sum_i P(X=i | Y=j) * log2 P(X=i | Y=j)
-#     #    H(X|Y)   = sum_j P(Y=j) * H(X | Y=j)
-#     ent_cond = 0.0
-#     for y in labels_Y:
-#         if pop_Y[y] == 0:
-#             continue
-#         py = pop_Y[y] / total
-#         # H(X|Y=j)
-#         h_xyj = 0.0
-#         for x in labels_X:
-#             p_ij = pop_XY[y][x] / pop_Y[y]    # P(X=i | Y=j)
-#             if p_ij > 0:
-#                 h_xyj -= p_ij * math.log2(p_ij)
-#         ent_cond += py * h_xyj
-
-
-#     ent_X = 0.0
-#     # P(X=i) = sum_j pop_XY[j][i] / total
-#     for x in labels_X:
-#         px = sum(pop_XY[y][x] for y in labels_Y) / total
-#         if px > 0:
-#             ent_X -= px * math.log2(px)
-
-
-#     seg_entropy = ent_cond / ent_X if ent_X > 0 else float('nan')
-#     return seg_entropy
 
 
 def compute_ent(labels_X, labels_Y, pop_XY, pop_Y):
@@ -126,10 +113,14 @@ def compute_ent(labels_X, labels_Y, pop_XY, pop_Y):
     return seg_entropy
 
 def compute_prob(labels_X, labels_Y, pop_XY, pop_Y):
-    total = sum(pop_Y.values())
+    total = sum(pop_Y.values()) # check if sum to 1
+    '''
+    I already checked the total is sum to 1.
+    '''
     # P(X=i), P(Y=j)
-    p_X = {x: sum(pop_XY[y][x] for y in labels_Y)/total for x in labels_X}
-    p_Y = {y: pop_Y[y]/total for y in labels_Y}
+    # It should be sum(pop_XY[y][x] for y in labels_Y)/total, but we will omit total since it's 1 in code
+    p_X = {x: sum(pop_XY[y][x] for y in labels_Y) for x in labels_X}
+    p_Y = {y: pop_Y[y] for y in labels_Y}
 
     seg_i = {}
     for x in labels_X:
@@ -140,16 +131,24 @@ def compute_prob(labels_X, labels_Y, pop_XY, pop_Y):
         seg_i[x] = s
     seg_prob = sum(p_X[x]*seg_i[x] for x in labels_X)
 
+
+    '''
+    calc max
+    '''
     max_seg = 2 * sum(p_X[x]**2 * (1-p_X[x]) for x in labels_X)
 
+    '''
+    Normalized
+    '''
     seg_prob_norm = seg_prob / max_seg if max_seg>0 else float('nan')
 
     return seg_prob_norm
 
 area = "county"
 transit_score = "walk_score"
+
 # thresholds_main_race = [0.55, 0.6, 0.7, 0.75, 0.8, 0.81, 0.85, 0.9, 0.905, 0.91]
-thresholds_main_race = [i * 0.1 for i in range(10)]
+thresholds_main_race = [i * 0.01 for i in range(100)]
 
 overall_seg_ent = []
 overall_seg_prob = []

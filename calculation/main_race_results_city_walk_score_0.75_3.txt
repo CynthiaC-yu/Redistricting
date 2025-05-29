@@ -3,13 +3,28 @@ Conditional entropy of main-race partition X given transit score partition Y:
 Area of Interest: city
 Transit Score Criterion: walk_score
 Total population (proportion): 1.00
-Main-race Threshold: 0.8
+Main-race Threshold: 0.75
 Good Transit-quality Threshold: 0.8
 Bad Transit-quality Threshold: 0.2
+
+Y = 'very_good':
+	population in Y: 0.00
+	Ent(X|Y=very_good): 0.0000 bits
+	Seg(X|Y=very_good): 0.0000 bits
+	** Breakdown by main-race partition X **
+	American Indian and Alaska Native             p_ij=0.0000	contribution=0.0000
+	Asian                                         p_ij=0.0000	contribution=0.0000
+	Black or African American                     p_ij=0.0000	contribution=0.0000
+	Hispanic or Latino                            p_ij=0.0000	contribution=0.0000
+	Native Hawaiian and Other Pacific Islander    p_ij=0.0000	contribution=0.0000
+	Some Other Race                               p_ij=0.0000	contribution=0.0000
+	White                                         p_ij=0.0000	contribution=0.0000
+	mixed                                         p_ij=0.0000	contribution=0.0000
 
 Y = 'good':
 	population in Y: 0.15
 	Ent(X|Y=good): 0.5436 bits
+	Seg(X|Y=good): 0.0521 bits
 	** Breakdown by main-race partition X **
 	American Indian and Alaska Native             p_ij=0.0000	contribution=0.0000
 	Asian                                         p_ij=0.0000	contribution=0.0000
@@ -22,7 +37,8 @@ Y = 'good':
 
 Y = 'average':
 	population in Y: 0.80
-	Ent(X|Y=average): 1.5044 bits
+	Ent(X|Y=average): 1.5108 bits
+	Seg(X|Y=average): 0.7825 bits
 	** Breakdown by main-race partition X **
 	American Indian and Alaska Native             p_ij=0.0000	contribution=0.0000
 	Asian                                         p_ij=0.0000	contribution=0.0000
@@ -30,12 +46,13 @@ Y = 'average':
 	Hispanic or Latino                            p_ij=0.0000	contribution=0.0000
 	Native Hawaiian and Other Pacific Islander    p_ij=0.0000	contribution=0.0000
 	Some Other Race                               p_ij=0.0000	contribution=0.0000
-	White                                         p_ij=0.2491	contribution=0.4995
-	mixed                                         p_ij=0.3425	contribution=0.5294
+	White                                         p_ij=0.2662	contribution=0.5083
+	mixed                                         p_ij=0.3254	contribution=0.5270
 
 Y = 'bad':
 	population in Y: 0.05
 	Ent(X|Y=bad): 0.2049 bits
+	Seg(X|Y=bad): 0.0061 bits
 	** Breakdown by main-race partition X **
 	American Indian and Alaska Native             p_ij=0.0000	contribution=0.0000
 	Asian                                         p_ij=0.0000	contribution=0.0000
@@ -46,12 +63,30 @@ Y = 'bad':
 	White                                         p_ij=0.0000	contribution=0.0000
 	mixed                                         p_ij=0.0000	contribution=0.0000
 
-Overall Ent(X|Y): 1.3013 bits
+Y = 'very_bad':
+	population in Y: 0.00
+	Ent(X|Y=very_bad): 0.0000 bits
+	Seg(X|Y=very_bad): 0.0000 bits
+	** Breakdown by main-race partition X **
+	American Indian and Alaska Native             p_ij=0.0000	contribution=0.0000
+	Asian                                         p_ij=0.0000	contribution=0.0000
+	Black or African American                     p_ij=0.0000	contribution=0.0000
+	Hispanic or Latino                            p_ij=0.0000	contribution=0.0000
+	Native Hawaiian and Other Pacific Islander    p_ij=0.0000	contribution=0.0000
+	Some Other Race                               p_ij=0.0000	contribution=0.0000
+	White                                         p_ij=0.0000	contribution=0.0000
+	mixed                                         p_ij=0.0000	contribution=0.0000
+
+Overall Ent(X): 1.5540 bits
+Overall Ent(X|Y): 1.3065 bits
+Overall Seg(X|Y): 0.8407
 
 ZIP codes by walk-score partition (Y):
+	very_good: 
 	good: 63101, 63109, 63110, 63118, 63143
 	average: 63102, 63103, 63104, 63105, 63106, 63107, 63108, 63111, 63112, 63113, 63115, 63116, 63117, 63119, 63123, 63125, 63130, 63133, 63136, 63137, 63139, 63147
 	bad: 63120, 63138
+	very_bad: 
 
 ZIP codes by main-race partition (X):
 	American Indian and Alaska Native: 
@@ -60,5 +95,5 @@ ZIP codes by main-race partition (X):
 	Hispanic or Latino: 
 	Native Hawaiian and Other Pacific Islander: 
 	Some Other Race: 
-	White: 63109, 63119, 63123, 63125, 63139
-	mixed: 63101, 63102, 63103, 63104, 63105, 63108, 63110, 63111, 63112, 63116, 63117, 63118, 63130, 63143
+	White: 63109, 63117, 63119, 63123, 63125, 63139
+	mixed: 63101, 63102, 63103, 63104, 63105, 63108, 63110, 63111, 63112, 63116, 63118, 63130, 63143
