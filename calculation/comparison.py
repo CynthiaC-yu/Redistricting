@@ -43,26 +43,26 @@ def load_data(area, transit_score, main_race_thresh,
             '''
             3
             '''
-            if score >= good_thresh:
-                y_label = 'good'
-            elif score >= bad_thresh:
-                y_label = 'average'
-            else: 
-                y_label = 'bad'
+            # if score >= good_thresh:
+            #     y_label = 'good'
+            # elif score >= bad_thresh:
+            #     y_label = 'average'
+            # else: 
+            #     y_label = 'bad'
 
             '''
             5
             '''
-            # if score >= very_good_thresh:
-            #     y_label = 'very_good'
-            # elif score >= good_thresh:
-            #     y_label = 'good'
-            # elif score >= bad_thresh:
-            #     y_label = 'average'
-            # elif score >= very_bad_thresh:
-            #     y_label = 'bad'
-            # else:
-            #     y_label = 'very_bad'
+            if score >= very_good_thresh:
+                y_label = 'very_good'
+            elif score >= good_thresh:
+                y_label = 'good'
+            elif score >= bad_thresh:
+                y_label = 'average'
+            elif score >= very_bad_thresh:
+                y_label = 'bad'
+            else:
+                y_label = 'very_bad'
 
 
             transit[z] = y_label
@@ -141,8 +141,8 @@ def compute_prob(labels_X, labels_Y, pop_XY, pop_Y):
     Normalized
     '''
     seg_prob_norm = seg_prob / max_seg if max_seg>0 else float('nan')
-
-    return seg_prob_norm
+    seg_prob_flip = 1 - seg_prob_norm
+    return seg_prob_flip
 
 area = "county"
 transit_score = "walk_score"

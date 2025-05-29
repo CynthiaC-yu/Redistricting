@@ -39,12 +39,12 @@ ZIP_FIELD = "ZCTA5CE20"
 
 zcta_gdf = gpd.read_file(SHAPEFILE_PATH)
 # only keep zcta that is in our header's category
-county_gdf = zcta_gdf[zcta_gdf[ZIP_FIELD].isin(label_by_zip)].copy()
-county_gdf["category"] = county_gdf[ZIP_FIELD].map(label_by_zip).fillna("unknown")
+area_gdf = zcta_gdf[zcta_gdf[ZIP_FIELD].isin(label_by_zip)].copy()
+area_gdf["category"] = area_gdf[ZIP_FIELD].map(label_by_zip).fillna("unknown")
 
 unique_labels = list(headers) + ["unknown"]
 category_numeric = {lab: i for i, lab in enumerate(unique_labels)}
-county_gdf["category_num"] = county_gdf["category"].map(category_numeric)
+area_gdf["category_num"] = area_gdf["category"].map(category_numeric)
 
 # remember to make sure each label has a cooresponidng color
 color_map = {
@@ -53,18 +53,18 @@ color_map = {
 }
 
 fig, ax = plt.subplots(1, 1, figsize=(10, 10))
-county_gdf.plot(
+area_gdf.plot(
     column="category",
     categorical=True,
     legend=True,
-    color=county_gdf["category"].map(color_map),
+    color=area_gdf["category"].map(color_map),
     edgecolor="black",
     linewidth=0.5,
     ax=ax
 )
 
 # Add zip code on each area block
-for idx, row in county_gdf.iterrows():
+for idx, row in area_gdf.iterrows():
     centroid = row["geometry"].centroid
     zip_code = row[ZIP_FIELD]
     ax.text(
@@ -94,7 +94,7 @@ def style_function(feature):
 
 m = folium.Map(location=[38.63, -90.42], zoom_start=10, tiles="cartodbpositron")
 folium.GeoJson(
-    county_gdf.__geo_interface__,
+    area_gdf.__geo_interface__,
     name=f"{table} Category",
     style_function=style_function,
     tooltip=folium.GeoJsonTooltip(fields=[ZIP_FIELD, "category"])
